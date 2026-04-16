@@ -29,9 +29,10 @@ async def widgets_page():
 
 ---
 
-## New SQLite Table
+## New SQLite Table & Migrations
 
-Add ORM model in `models.py`:
+### 1. Define ORM Model
+Add the ORM model in `models.py`:
 
 ```python
 class Widget(Base):
@@ -40,17 +41,54 @@ class Widget(Base):
     ...
 ```
 
-New tables are created automatically by `Base.metadata.create_all()` in `db.py`. No migration needed.
+### 2. Create Migration Script
+Create a new `.sql` file in `src/[package]/database/migrations/` using a sequential prefix:
 
-For **new columns on existing tables**, add to `_run_column_migrations()` in `db.py`:
+`0001_initial_schema.sql` → `0002_add_widgets.sql` → `0003_add_user_bio.sql`
+
+Example migration:
+```sql
+CREATE TABLE IF NOT EXISTS widgets (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### 3. Implementation Logic (db.py)
+The `init_db()` function in `db.py` must track and apply these scripts using a `_migrations` table. Never skip migrations — SQLAlchemy's `Base.metadata.create_all()` is only for initial bootstrap and does not handle schema drift.
+
+#### SQLite WAL Mode
+To support concurrent writes from collectors and reads from the API, always enable **Write-Ahead Logging (WAL)** mode on the SQLite connection:
 
 ```python
-if "new_col" not in cols:
-    conn.execute(text("ALTER TABLE existing_table ADD COLUMN new_col TEXT"))
+def init_db(engine):
+    with engine.connect() as conn:
+        conn.execute(text("PRAGMA journal_mode=WAL;"))
+        run_migrations(conn)
+```
+
+```python
+def run_migrations(conn):
+    conn.execute(text("CREATE TABLE IF NOT EXISTS _migrations (filename TEXT PRIMARY KEY)"))
+    applied = {row[0] for row in conn.execute(text("SELECT filename FROM _migrations"))}
+    
+    migration_dir = Path(__file__).parent / "migrations"
+    for sql_file in sorted(migration_dir.glob("*.sql")):
+        if sql_file.name not in applied:
+            with open(sql_file) as f:
+                conn.execute(text(f.read()))
+            conn.execute(text("INSERT INTO _migrations (filename) VALUES (:f)"), {"f": sql_file.name})
     conn.commit()
 ```
 
-**Always make migrations idempotent** — check `PRAGMA table_info` first. Never skip `_run_column_migrations` when adding columns; SQLAlchemy's `create_all` does not alter existing tables.
+---
+
+## Testing Conventions
+
+See `06-testing-conventions.md` for the full strategy.
+- **Backend**: Pytest in `tests/backend/`. Use `httpx.AsyncClient`.
+- **Frontend**: Playwright in `tests/frontend/`.
 
 ---
 

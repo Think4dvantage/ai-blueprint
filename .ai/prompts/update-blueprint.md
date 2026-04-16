@@ -12,8 +12,19 @@ Not all `.ai/` files are updated. The blueprint owns the **framework**. The proj
 
 | Category | Files | Rule |
 |---|---|---|
-| **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-backend-conventions.md`, `instructions/03-frontend-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, all `prompts/*.md` | Always overwrite with latest from repo |
+| **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-backend-conventions.md`, `instructions/03-frontend-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, `instructions/06-testing-conventions.md`, `instructions/07-api-conventions.md`, all `prompts/*.md` | Always overwrite with latest from repo |
 | **Project data** — owned by this project | `instructions/01-project-overview.md`, `context/architecture.md`, `context/features.md` | Never touch — these are project-specific |
+
+---
+
+## Step 0 — Fetch Blueprint Manifest
+
+Before fetching individual files, attempt to fetch the blueprint manifest from the central repo:
+
+**URL**: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/.ai/manifest.json`
+
+- If the fetch is successful, use the file list in the manifest to determine which files to fetch in Step 1.
+- If the fetch fails (404), proceed to Step 1 using the hardcoded list below as a fallback.
 
 ---
 
@@ -23,7 +34,7 @@ Fetch each framework file from the central repo using its raw GitHub URL.
 
 Base URL: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/`
 
-Files to fetch and their local targets:
+**Hardcoded Fallback List** (only use if Step 0 fails):
 
 | Remote path | Local path |
 |---|---|
@@ -32,13 +43,16 @@ Files to fetch and their local targets:
 | `.ai/instructions/03-frontend-conventions.md` | `.ai/instructions/03-frontend-conventions.md` |
 | `.ai/instructions/04-constraints.md` | `.ai/instructions/04-constraints.md` |
 | `.ai/instructions/05-user-profile.md` | `.ai/instructions/05-user-profile.md` |
+| `.ai/instructions/06-testing-conventions.md` | `.ai/instructions/06-testing-conventions.md` |
+| `.ai/instructions/07-api-conventions.md` | `.ai/instructions/07-api-conventions.md` |
 | `.ai/prompts/add-api-router.md` | `.ai/prompts/add-api-router.md` |
 | `.ai/prompts/add-i18n-keys.md` | `.ai/prompts/add-i18n-keys.md` |
 | `.ai/prompts/add-sqlite-table.md` | `.ai/prompts/add-sqlite-table.md` |
 | `.ai/prompts/analyze.md` | `.ai/prompts/analyze.md` |
 | `.ai/prompts/architect.md` | `.ai/prompts/architect.md` |
 | `.ai/prompts/checklist.md` | `.ai/prompts/checklist.md` |
-| `.ai/prompts/clarify.md` | `.ai/prompts/clarify.md` |
+| `.ai/prompts/clarify.md" | `.ai/prompts/clarify.md" |
+| `.ai/prompts/fix-bug.md` | `.ai/prompts/fix-bug.md` |
 | `.ai/prompts/implement.md` | `.ai/prompts/implement.md` |
 | `.ai/prompts/new-feature.md` | `.ai/prompts/new-feature.md` |
 | `.ai/prompts/plan.md` | `.ai/prompts/plan.md` |
@@ -61,7 +75,7 @@ The central repo may have added new framework files that don't exist locally yet
 
 ## Step 3 — Detect Removed Files
 
-After writing all fetched files, check if any local framework files exist that were **not** in the fetch list above. If any are found:
+After writing all fetched files, check if any local framework files exist that were **not** in the fetch list (from manifest or fallback). If any are found:
 
 - Do not delete them automatically
 - List them and ask: "These local framework files have no equivalent in the central blueprint. Delete them? (yes/no per file)"

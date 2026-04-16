@@ -106,11 +106,14 @@ Update the relevant files whenever the `.ai/` context changes:
     03-frontend-conventions.md  ← No-build-step JS, i18n, dark theme, logging
     04-constraints.md           ← Hard rules: what NOT to do
     05-user-profile.md          ← Who the user is, communication style, working rules
+    06-testing-conventions.md   ← Testing strategy, Pytest, Playwright
+    07-api-conventions.md       ← Standardized API response format
   context/
     architecture.md             ← SQLite tables, InfluxDB measurements, API contracts
     features.md                 ← Shipped milestones + backlog
   prompts/
     new-feature.md              ← End-to-end implementation checklist
+    fix-bug.md                  ← Bug-fixing workflow (Reproduction First)
     add-api-router.md           ← Router scaffolding steps
     add-sqlite-table.md         ← Table + migration steps
     add-i18n-keys.md            ← Locale file update steps
