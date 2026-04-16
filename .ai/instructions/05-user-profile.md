@@ -49,6 +49,10 @@ The user does not write code manually. All code changes go through AI. This mean
 - **Operability is goal #1** — prefer boring, observable, easy-to-restart over clever
 - **Automate everything** — if a task will happen more than once, it should be scripted or pipelined
 
+### Line endings
+
+**Always use LF (`\n`) line endings** when writing any file — regardless of the host OS being Windows. Never CRLF. All files are destined for Linux containers and Linux git remotes. The `.gitattributes` enforces this at commit time but files should be written correctly from the start.
+
 ### Practical constraints
 
 - Traefik label format: list style (`- "label=value"`), not map style
