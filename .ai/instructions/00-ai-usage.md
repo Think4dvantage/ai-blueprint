@@ -91,11 +91,20 @@ Update the relevant files whenever the `.ai/` context changes:
 
 **Rule**: If the `.ai/` context is the source of truth, human-readable files are derived output. Never let them drift more than one session behind.
 
-**Before ending a session** (or when asked to prepare for `/clear`), run `.ai/prompts/sync.md` to flush all pending updates at once.
+**Before ending a session** (or when asked to prepare for `/clear`), run `.ai/prompts/sync.md` to flush all pending updates at once. This ensures that the `.ai/` context and all human-readable files are in sync.
+
+### Staying in Sync with the Blueprint
+
+If you want to pull in the latest framework improvements, new prompts, or updated instructions from the central [AI Blueprint](https://github.com/Think4dvantage/ai-blueprint), run:
+
+`/prompt .ai/prompts/update-blueprint.md`
+
+This will sync the project's framework files with the central repository while keeping your project-specific data intact.
 
 ---
 
 ## File Map
+
 
 ```
 .ai/

@@ -113,6 +113,39 @@ Do not auto-fix conflicts. Report them and ask if the user wants to address them
 
 Pointer files (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`) are not updated by this prompt — they are one-liners and don't change. No action needed.
 
+## Step 7 — Identify Contributions to the Blueprint
+
+The goal of the blueprint is to evolve. If this project has improved a framework file or added a useful new prompt, suggest contributing it back to the central repo.
+
+### 7.1 Scan for Local Additions
+Identify any files in `.ai/prompts/` or `.ai/instructions/` (excluding project data files) that:
+- Exist locally but were NOT in the blueprint manifest/fetch list.
+- Have been significantly improved or customized in a way that would benefit other projects.
+
+### 7.2 Propose the Contribution
+If additions or improvements are found, present them to the user:
+
+> **Contribution Suggestion**: I noticed you've added/improved the following framework files:
+> - `prompts/new-cool-tool.md`
+> - `instructions/02-backend-conventions.md` (improved auth section)
+>
+> Would you like to contribute these back to the central AI Blueprint?
+
+### 7.3 Provide the "Transport" Prompt
+If the user wants to contribute, generate a block they can copy:
+
+"To update the central blueprint, open the `ai-blueprint` repository and run this prompt:
+```markdown
+# Contribution from Project: [THIS PROJECT NAME]
+
+I have improvements to the following blueprint files. Please read their content from the other project and update the blueprint to match:
+
+1. `prompts/new-cool-tool.md`: [Brief description of what it does]
+2. `instructions/02-backend-conventions.md`: [Brief description of the improvement]
+
+[Paste the full content of the files here or instructions on where to find them]
+```"
+
 ---
 
 ## Notes
