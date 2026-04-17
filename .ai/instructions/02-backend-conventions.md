@@ -131,5 +131,5 @@ Add to `CollectorScheduler` in `scheduler.py`. Use `AsyncIOScheduler` + `Interva
 - **SQLAlchemy 2.0 style** — use `select()`, not legacy `query()`.
 - **One router per domain** — never put all routes in `main.py`.
 - **Abstract base classes** (ABC + `@abstractmethod`) for collectors.
-- **Log** all collection events and errors with the standard `logging` module.
-- **No print statements** in production code.
+- **Log extensively** — startup sequence, every request, every job run, every config value loaded. See `08-operability.md` for the full doctrine.
+- **No print statements** in production code — always use the `logging` module.

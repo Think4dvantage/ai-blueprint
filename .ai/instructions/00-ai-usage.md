@@ -56,6 +56,7 @@ Before making any changes, read the relevant `.ai/` files:
 - `instructions/03-frontend-conventions.md` — no-build-step JS, i18n, theming
 - `instructions/04-constraints.md` — hard rules (what NOT to do)
 - `instructions/05-user-profile.md` — who the user is, how to communicate, working rules
+- `instructions/08-operability.md` — logging doctrine, health endpoints, config transparency
 - `context/architecture.md` — SQLite schema, InfluxDB measurements, API contracts
 - `context/features.md` — shipped milestones and backlog
 
@@ -117,6 +118,7 @@ This will sync the project's framework files with the central repository while k
     05-user-profile.md          ← Who the user is, communication style, working rules
     06-testing-conventions.md   ← Testing strategy, Pytest, Playwright
     07-api-conventions.md       ← Standardized API response format
+    08-operability.md           ← Logging doctrine, health endpoints, config transparency
   context/
     architecture.md             ← SQLite tables, InfluxDB measurements, API contracts
     features.md                 ← Shipped milestones + backlog
