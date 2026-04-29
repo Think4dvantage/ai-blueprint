@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(cp .ai/instructions/*.md dev-web/.ai/instructions/)",
+      "Bash(cp .ai/context/*.md dev-web/.ai/context/)",
+      "Bash(cp .ai/prompts/*.md dev-web/.ai/prompts/)",
+      "Bash(cp C:/git/ai-blueprint/bp-OPS/.ai/instructions/00-ai-usage.md C:/git/lg4.ch/.ai/instructions/00-ai-usage.md)",
+      "Bash(cp C:/git/ai-blueprint/bp-OPS/.ai/instructions/04-constraints.md C:/git/lg4.ch/.ai/instructions/04-constraints.md)",
+      "Bash(cp C:/git/ai-blueprint/bp-OPS/.ai/instructions/05-user-profile.md C:/git/lg4.ch/.ai/instructions/05-user-profile.md)",
+      "Bash(cp C:/git/ai-blueprint/bp-OPS/.ai/instructions/06-operability.md C:/git/lg4.ch/.ai/instructions/06-operability.md)",
+      "Bash(cp C:/git/ai-blueprint/bp-OPS/.ai/instructions/03-cicd-conventions.md C:/git/lg4.ch/.ai/instructions/03-cicd-conventions.md)",
+      "Bash(cp C:/git/ai-blueprint/dev-web/.ai/instructions/__TRACKED_VAR__ C:/git/LSMFAPI/.ai/instructions/__TRACKED_VAR__)",
+      "Bash(cp C:/git/ai-blueprint/dev-web/.ai/prompts/__TRACKED_VAR__ C:/git/LSMFAPI/.ai/prompts/__TRACKED_VAR__)",
+      "Bash(cp C:/git/ai-blueprint/dev-web/.ai/instructions/__TRACKED_VAR__ C:/git/Lenticularis/.ai/instructions/__TRACKED_VAR__)",
+      "Bash(cp C:/git/ai-blueprint/dev-web/.ai/prompts/__TRACKED_VAR__ C:/git/Lenticularis/.ai/prompts/__TRACKED_VAR__)",
+      "Bash(mkdir -p C:/git/Telefonjasser/.ai/instructions C:/git/Telefonjasser/.ai/context)",
+      "Bash(cp C:/git/ai-blueprint/dev-app/.ai/instructions/__TRACKED_VAR__ C:/git/Telefonjasser/.ai/instructions/__TRACKED_VAR__)",
+      "Bash(cp C:/git/ai-blueprint/dev-app/.ai/prompts/__TRACKED_VAR__ C:/git/Telefonjasser/.ai/prompts/__TRACKED_VAR__)",
+      "Read(//c/git/lg4.ch/.ai/prompts/**)",
+      "Read(//c/git/sdh.lol/.ai/prompts/**)",
+      "Read(//c/git/LSMFAPI/.ai/prompts/**)",
+      "Read(//c/git/Lenticularis/.ai/prompts/**)"
+    ]
+  }
+}
