@@ -40,6 +40,11 @@ Specify → Clarify → Plan → Checklist → Tasks → Analyze → Implement
 
 See the matching prompt file in `.ai/prompts/` for each step.
 
+Once a spec's feature has shipped (landed in `features.md` as a released version), move its
+folder to `specs/archive/<NNN>-<feature-name>/` (`git mv`, so history follows) and update any
+cross-references. This keeps `specs/` at the top level showing only what's still active —
+drafted, planned, or shelved.
+
 ---
 
 ## Always Read First
@@ -52,7 +57,7 @@ Before making any changes, read the relevant `.ai/` files:
 - `instructions/04-constraints.md` — hard rules (what NOT to do)
 - `instructions/05-user-profile.md` — who the user is, how to communicate, working rules
 - `instructions/06-testing-conventions.md` — Flutter test strategy
-- `instructions/07-observability.md` — logging, error reporting, debug vs. release behavior
+- `instructions/08-operability.md` — logging, error reporting, debug vs. release behavior
 - `context/architecture.md` — screen map, state classes, API contracts consumed
 - `context/features.md` — shipped milestones and backlog
 
@@ -103,7 +108,7 @@ To pull the latest framework improvements from the central [AI Blueprint](https:
     04-constraints.md           ← Hard rules: what NOT to do
     05-user-profile.md          ← Who the user is, communication style, working rules
     06-testing-conventions.md   ← Flutter test strategy: unit, widget, integration
-    07-observability.md         ← Logging, error reporting, debug vs. release
+    08-operability.md           ← Logging, error reporting, debug vs. release
   context/
     architecture.md             ← Screen map, state classes, API contracts consumed
     features.md                 ← Shipped milestones + backlog

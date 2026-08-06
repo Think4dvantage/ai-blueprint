@@ -1,0 +1,33 @@
+{
+  "category": "bp-OPS",
+  "framework_files": [
+    "instructions/00-ai-usage.md",
+    "instructions/02-infra-conventions.md",
+    "instructions/03-cicd-conventions.md",
+    "instructions/04-constraints.md",
+    "instructions/05-user-profile.md",
+    "instructions/08-operability.md",
+    "prompts/add-service.md",
+    "prompts/add-traefik-route.md",
+    "prompts/add-pipeline.md",
+    "prompts/debug-infra.md",
+    "prompts/analyze.md",
+    "prompts/architect.md",
+    "prompts/checklist.md",
+    "prompts/clarify.md",
+    "prompts/fix-bug.md",
+    "prompts/implement.md",
+    "prompts/plan.md",
+    "prompts/specify.md",
+    "prompts/sync.md",
+    "prompts/tasks.md",
+    "prompts/taskstoissues.md",
+    "prompts/update-blueprint.md",
+    "prompts/update-readme.md"
+  ],
+  "project_data_files": [
+    "instructions/01-project-overview.md",
+    "context/architecture.md",
+    "context/features.md"
+  ]
+}

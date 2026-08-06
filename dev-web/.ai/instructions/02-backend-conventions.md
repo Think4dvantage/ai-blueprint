@@ -31,6 +31,10 @@ async def widgets_page():
 
 ## New SQLite Table & Migrations
 
+> **No Alembic.** Migrations are raw `ALTER TABLE` statements guarded by `PRAGMA table_info()`
+> checks in `_run_column_migrations()` in `src/[package]/database/db.py`.
+> There is no `_migrations` table and no `.sql` migration files.
+
 ### 1. Define ORM Model
 Add the ORM model in `models.py`:
 
@@ -41,45 +45,35 @@ class Widget(Base):
     ...
 ```
 
-### 2. Create Migration Script
-Create a new `.sql` file in `src/[package]/database/migrations/` using a sequential prefix:
+### 2. Schema creation
+`Base.metadata.create_all()` in `init_db()` handles the initial schema on first boot. It is
+idempotent — run it every startup; it only creates tables that are missing.
 
-`0001_initial_schema.sql` → `0002_add_widgets.sql` → `0003_add_user_bio.sql`
+### 3. Adding new columns (`_run_column_migrations`)
+For columns added after the initial schema, add an idempotent guard in `_run_column_migrations()`:
 
-Example migration:
-```sql
-CREATE TABLE IF NOT EXISTS widgets (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+```python
+cols = {row[1] for row in conn.execute(text("PRAGMA table_info(widgets)")).fetchall()}
+if "new_col" not in cols:
+    conn.execute(text("ALTER TABLE widgets ADD COLUMN new_col TEXT"))
+    conn.commit()
+    logger.info("Migration: added widgets.new_col column")
 ```
 
-### 3. Implementation Logic (db.py)
-The `init_db()` function in `db.py` must track and apply these scripts using a `_migrations` table. Never skip migrations — SQLAlchemy's `Base.metadata.create_all()` is only for initial bootstrap and does not handle schema drift.
+Never use Alembic. Never create `.sql` migration files. Never maintain a `_migrations` table.
 
 #### SQLite WAL Mode
-To support concurrent writes from collectors and reads from the API, always enable **Write-Ahead Logging (WAL)** mode on the SQLite connection:
+Enable **Write-Ahead Logging (WAL)** mode via a SQLAlchemy `connect` event listener in
+`init_db()`, so it is applied to every connection the pool opens, not just the one used at startup:
 
 ```python
-def init_db(engine):
-    with engine.connect() as conn:
-        conn.execute(text("PRAGMA journal_mode=WAL;"))
-        run_migrations(conn)
-```
-
-```python
-def run_migrations(conn):
-    conn.execute(text("CREATE TABLE IF NOT EXISTS _migrations (filename TEXT PRIMARY KEY)"))
-    applied = {row[0] for row in conn.execute(text("SELECT filename FROM _migrations"))}
-    
-    migration_dir = Path(__file__).parent / "migrations"
-    for sql_file in sorted(migration_dir.glob("*.sql")):
-        if sql_file.name not in applied:
-            with open(sql_file) as f:
-                conn.execute(text(f.read()))
-            conn.execute(text("INSERT INTO _migrations (filename) VALUES (:f)"), {"f": sql_file.name})
-    conn.commit()
+@event.listens_for(_engine, "connect")
+def _set_sqlite_pragma(dbapi_conn, _rec):
+    cur = dbapi_conn.cursor()
+    cur.execute("PRAGMA journal_mode=WAL")
+    cur.execute("PRAGMA synchronous=NORMAL")
+    cur.execute("PRAGMA busy_timeout=30000")
+    cur.close()
 ```
 
 ---
@@ -87,7 +81,7 @@ def run_migrations(conn):
 ## Testing Conventions
 
 See `06-testing-conventions.md` for the full strategy.
-- **Backend**: Pytest in `tests/backend/`. Use `httpx.AsyncClient`.
+- **Backend**: Pytest in `tests/backend/`. Use `httpx.AsyncClient` with `transport=ASGITransport(app=...)` — the bare `app=` kwarg was removed in httpx 0.28.
 - **Frontend**: Playwright in `tests/frontend/`.
 
 ---
@@ -95,6 +89,10 @@ See `06-testing-conventions.md` for the full strategy.
 ## New InfluxDB Query
 
 Add a method to `InfluxClient` in `influx.py`. Keep Flux query strings inside the method. Return plain Python dicts/lists (no ORM objects).
+
+**Batch, never loop.** Add a `query_x_for_stations(ids: list[str])` method and call it once,
+instead of calling a single-ID method inside a per-station loop. A per-item Influx round trip
+inside a loop turns an O(1) query into O(n) queries under load.
 
 ---
 
@@ -115,11 +113,33 @@ Import from `[package].api.dependencies`:
 
 Add new keys to `config.py` Pydantic models **and** to `config.yml.example`. Never read `os.environ` directly — always go through `get_config()`.
 
+**Resolve config at the call site, not at import time or in a module-level global.** A shared/base
+module that calls `get_config()` itself (or reads any other patchable global, e.g.
+`datetime.now()`) binds its own reference to that name — a test that `monkeypatch`s
+`get_config()` on the *caller's* module namespace does not affect it, and the patch silently does
+nothing. Take the resolved value as a parameter instead, passed in by the caller that already
+went through `get_config()`. See `06-testing-conventions.md` for the test-side half of this.
+
 ---
 
 ## Scheduler Jobs
 
 Add to `CollectorScheduler` in `scheduler.py`. Use `AsyncIOScheduler` + `IntervalTrigger`. Track health in `_collector_health` dict.
+
+**Guard every job against overlapping runs with an `asyncio.Lock`.** If a trigger fires while the
+previous run of the same job is still active, skip and log — never let two runs of the same
+collector execute concurrently:
+
+```python
+_widget_lock = asyncio.Lock()
+
+async def _run_widget_collector() -> None:
+    if _widget_lock.locked():
+        logger.info("widget collection already in progress — skipping trigger")
+        return
+    async with _widget_lock:
+        ...
+```
 
 ---
 
@@ -133,3 +153,14 @@ Add to `CollectorScheduler` in `scheduler.py`. Use `AsyncIOScheduler` + `Interva
 - **Abstract base classes** (ABC + `@abstractmethod`) for collectors.
 - **Log extensively** — startup sequence, every request, every job run, every config value loaded. See `08-operability.md` for the full doctrine.
 - **No print statements** in production code — always use the `logging` module.
+- **Never call blocking synchronous I/O inside `async def` without `asyncio.to_thread()`.** InfluxDB
+  client methods and most non-`httpx` HTTP libraries are synchronous — calling them directly in a
+  handler or scheduler job blocks the entire event loop and stalls every concurrent request,
+  `/health` included. The tell: a long gap between consecutive log lines with no output while the
+  service otherwise looks idle.
+  ```python
+  # WRONG — blocks the event loop
+  data = request.app.state.influx.query_latest(station_id)
+  # RIGHT
+  data = await asyncio.to_thread(request.app.state.influx.query_latest, station_id)
+  ```

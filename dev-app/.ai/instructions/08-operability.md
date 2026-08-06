@@ -1,4 +1,4 @@
-# Observability Conventions
+# Operability Conventions
 
 ## Philosophy
 

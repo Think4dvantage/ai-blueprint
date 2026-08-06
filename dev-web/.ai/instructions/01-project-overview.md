@@ -18,7 +18,7 @@
 | Relational DB | SQLite via SQLAlchemy (no Alembic — see backend conventions) |
 | Scheduler | APScheduler |
 | HTTP client | httpx (async) |
-| Auth | JWT via `python-jose`, passwords via `passlib` |
+| Auth | JWT via `python-jose`, passwords via `bcrypt` directly (**not** `passlib` — its bcrypt backend reads `bcrypt.__about__.__version__`, which was removed in bcrypt 4.1+, breaking password verification) |
 | Config | YAML (`config.yml`) validated by Pydantic |
 | Frontend | Vanilla JS + [Mapping lib] + [Chart lib] |
 | Container | Docker + docker-compose |

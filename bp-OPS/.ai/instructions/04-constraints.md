@@ -16,6 +16,10 @@
 
 **Never use `:latest` in `docker-compose.yml`.** Always pin to a specific version tag. `latest` makes rollbacks impossible and deployments non-deterministic.
 
+When choosing which version to pin, verify the current latest **stable** release against the
+registry first (see `05-user-profile.md` — "Always verify current versions") — don't guess from
+memory and don't reflexively re-pin to an old remembered version either.
+
 ---
 
 ## Traefik Labels

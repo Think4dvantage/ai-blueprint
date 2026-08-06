@@ -11,7 +11,7 @@
 
 | Category | Files | Rule |
 |---|---|---|
-| **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-infra-conventions.md`, `instructions/03-cicd-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, `instructions/06-operability.md`, all `prompts/*.md` | Always overwrite with latest from repo |
+| **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-infra-conventions.md`, `instructions/03-cicd-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, `instructions/08-operability.md`, all `prompts/*.md` | Always overwrite with latest from repo |
 | **Project data** — owned by this project | `instructions/01-project-overview.md`, `context/architecture.md`, `context/features.md` | Never touch — project-specific |
 
 ---
@@ -38,7 +38,7 @@ Base URL: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp
 | `instructions/03-cicd-conventions.md` | `instructions/03-cicd-conventions.md` |
 | `instructions/04-constraints.md` | `instructions/04-constraints.md` |
 | `instructions/05-user-profile.md` | `instructions/05-user-profile.md` |
-| `instructions/06-operability.md` | `instructions/06-operability.md` |
+| `instructions/08-operability.md` | `instructions/08-operability.md` |
 | `prompts/add-service.md` | `prompts/add-service.md` |
 | `prompts/add-traefik-route.md` | `prompts/add-traefik-route.md` |
 | `prompts/add-pipeline.md` | `prompts/add-pipeline.md` |
@@ -56,7 +56,6 @@ Base URL: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp
 | `prompts/taskstoissues.md` | `prompts/taskstoissues.md` |
 | `prompts/update-blueprint.md` | `prompts/update-blueprint.md` |
 | `prompts/update-readme.md` | `prompts/update-readme.md` |
-| `prompts/architect.md` | `prompts/architect.md` |
 
 Fetch all files. If a fetch fails, note it and continue — do not abort.
 

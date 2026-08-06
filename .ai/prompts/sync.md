@@ -44,6 +44,24 @@ Do not auto-propagate category-specific files (conventions, update-blueprint.md,
 
 ---
 
+## Step 2b — Keep `manifest.json` in Sync
+
+Each category's `manifest.json` (`{category}/.ai/manifest.json`) lists the exact same files as
+that category's `prompts/update-blueprint.md` Framework row and Hardcoded Fallback List — it is
+what `update-blueprint.md` Step 0 fetches first, before falling back to the hardcoded table. If
+any file was added, removed, or renamed in a category this session (new prompt, renumbered
+instruction file, etc.), update all three in lockstep:
+
+1. `{category}/.ai/manifest.json` — `framework_files` array
+2. `{category}/.ai/prompts/update-blueprint.md` — Framework row (line ~14) AND Hardcoded Fallback
+   List table
+3. `{category}/.ai/instructions/00-ai-usage.md` — File Map
+
+These three must never disagree — that disagreement is exactly what the manifest exists to
+prevent, and a stale manifest is worse than no manifest (it fetches successfully and lies).
+
+---
+
 ## Step 3 — Update Feature History
 
 Update `context/features.md`:
@@ -59,6 +77,7 @@ Update `context/features.md`:
 - [ ] `context/features.md` reflects current state
 - [ ] `instructions/01-repo-overview.md` is accurate for all categories
 - [ ] `prompts/apply-blueprint.md` matches the current category list
+- [ ] Each category's `manifest.json`, `update-blueprint.md`, and `00-ai-usage.md` File Map agree on the file list (see Step 2b)
 - [ ] No secrets or credentials in any committed file
 
 Report the checklist result. If any item is incomplete, fix it before finishing.

@@ -13,7 +13,7 @@ Not all `.ai/` files are updated. The blueprint owns the **framework**. The proj
 
 | Category | Files | Rule |
 |---|---|---|
-| **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-backend-conventions.md`, `instructions/03-frontend-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, `instructions/06-testing-conventions.md`, `instructions/07-api-conventions.md`, all `prompts/*.md` | Always overwrite with latest from repo |
+| **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-backend-conventions.md`, `instructions/03-frontend-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, `instructions/06-testing-conventions.md`, `instructions/07-api-conventions.md`, `instructions/08-operability.md`, all `prompts/*.md` | Always overwrite with latest from repo |
 | **Project data** — owned by this project | `instructions/01-project-overview.md`, `context/architecture.md`, `context/features.md` | Never touch — these are project-specific |
 
 ---

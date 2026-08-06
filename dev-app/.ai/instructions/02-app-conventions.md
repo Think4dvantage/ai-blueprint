@@ -113,7 +113,7 @@ class UserModel {
 - **Always use typed parameters** — never `dynamic` unless forced by an external API.
 - **Named parameters** for constructors with more than 2 arguments.
 - **`const` constructors** wherever possible — improves rebuild performance.
-- **No `print()` statements** — use the `logger` package (see `07-observability.md`).
+- **No `print()` statements** — use the `logger` package (see `08-operability.md`).
 - **Async/await** for all async operations — never raw `Future.then()`.
 - **`late` keyword** only for values that are initialized before first use and provably non-null. If uncertain, use nullable + null check.
 

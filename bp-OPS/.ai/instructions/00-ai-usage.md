@@ -39,6 +39,11 @@ Specify → Clarify → Plan → Checklist → Tasks → Analyze → Implement
 
 See the matching prompt file in `.ai/prompts/` for each step.
 
+Once a spec's change has shipped (landed in `features.md` as a released version), move its
+folder to `specs/archive/<NNN>-<feature-name>/` (`git mv`, so history follows) and update any
+cross-references. This keeps `specs/` at the top level showing only what's still active —
+drafted, planned, or shelved.
+
 ---
 
 ## Always Read First
@@ -50,7 +55,7 @@ Before making any changes, read the relevant `.ai/` files:
 - `instructions/03-cicd-conventions.md` — GitHub Actions workflow patterns
 - `instructions/04-constraints.md` — hard rules (what NOT to do)
 - `instructions/05-user-profile.md` — who the user is, how to communicate
-- `instructions/06-operability.md` — container health, monitoring, logging
+- `instructions/08-operability.md` — container health, monitoring, logging
 - `context/architecture.md` — deployed services map, network layout, pipeline inventory
 - `context/features.md` — shipped milestones and backlog
 
@@ -99,7 +104,7 @@ To pull the latest framework improvements from the central [AI Blueprint](https:
     03-cicd-conventions.md      ← GitHub Actions workflow patterns, pipeline structure
     04-constraints.md           ← Hard rules: what NOT to do
     05-user-profile.md          ← Who the user is, communication style, working rules
-    06-operability.md           ← Container health, monitoring, log strategy
+    08-operability.md           ← Container health, monitoring, log strategy
   context/
     architecture.md             ← Deployed services, networks, pipeline inventory
     features.md                 ← Shipped milestones + backlog

@@ -62,6 +62,8 @@ Before making any changes to this repo, read:
     00-ai-usage.md         ← This file: meta-rules for the blueprint repo itself
     01-repo-overview.md    ← Category descriptions, when to use each, shared files
     05-user-profile.md     ← Canonical user profile — propagate changes to all categories
+  context/
+    features.md            ← Shipped milestones + backlog for this meta-repo
   prompts/
     apply-blueprint.md     ← How to copy a category into a new project
     new-category.md        ← How to add a new blueprint category

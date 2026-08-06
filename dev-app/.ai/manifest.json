@@ -1,0 +1,32 @@
+{
+  "category": "dev-app",
+  "framework_files": [
+    "instructions/00-ai-usage.md",
+    "instructions/02-app-conventions.md",
+    "instructions/03-api-client-conventions.md",
+    "instructions/04-constraints.md",
+    "instructions/05-user-profile.md",
+    "instructions/06-testing-conventions.md",
+    "instructions/08-operability.md",
+    "prompts/new-feature.md",
+    "prompts/add-screen.md",
+    "prompts/analyze.md",
+    "prompts/architect.md",
+    "prompts/checklist.md",
+    "prompts/clarify.md",
+    "prompts/fix-bug.md",
+    "prompts/implement.md",
+    "prompts/plan.md",
+    "prompts/specify.md",
+    "prompts/sync.md",
+    "prompts/tasks.md",
+    "prompts/taskstoissues.md",
+    "prompts/update-blueprint.md",
+    "prompts/update-readme.md"
+  ],
+  "project_data_files": [
+    "instructions/01-project-overview.md",
+    "context/architecture.md",
+    "context/features.md"
+  ]
+}

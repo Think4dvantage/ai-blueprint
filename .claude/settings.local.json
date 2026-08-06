@@ -21,7 +21,8 @@
       "Read(//c/git/lg4.ch/.ai/prompts/**)",
       "Read(//c/git/sdh.lol/.ai/prompts/**)",
       "Read(//c/git/LSMFAPI/.ai/prompts/**)",
-      "Read(//c/git/Lenticularis/.ai/prompts/**)"
+      "Read(//c/git/Lenticularis/.ai/prompts/**)",
+      "Bash(xargs wc -l)"
     ]
   }
 }

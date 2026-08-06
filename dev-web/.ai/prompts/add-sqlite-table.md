@@ -15,20 +15,17 @@ Add a new SQLite table for `{entity}` following the project conventions:
        created_at = Column(DateTime, default=datetime.utcnow)
    ```
 
-2. **Create a migration script** in `src/[package]/database/migrations/`:
-   Use the next sequential prefix (e.g., `0002_add_entities.sql`).
-   ```sql
-   CREATE TABLE IF NOT EXISTS entities (
-       id TEXT PRIMARY KEY,
-       name TEXT NOT NULL,
-       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-   );
+2. **New table**: nothing further to do — `Base.metadata.create_all()` in `init_db()` creates it on next boot.
+   **New column on an existing table**: add an idempotent guard in `_run_column_migrations()`
+   in `src/[package]/database/db.py`:
+   ```python
+   cols = {row[1] for row in conn.execute(text("PRAGMA table_info(entities)")).fetchall()}
+   if "new_col" not in cols:
+       conn.execute(text("ALTER TABLE entities ADD COLUMN new_col TEXT"))
+       conn.commit()
+       logger.info("Migration: added entities.new_col column")
    ```
-   If adding a **column to an existing table**, use an `ALTER TABLE` statement instead:
-   ```sql
-   ALTER TABLE entities ADD COLUMN new_col TEXT;
-   ```
-   Always ensure migration SQL is as idempotent as possible (`IF NOT EXISTS`).
+   No Alembic, no `.sql` files, no `_migrations` table — see `02-backend-conventions.md`.
 
 3. **Add the Pydantic schemas** (Create / Update / Out) in `src/[package]/models/`.
 
