@@ -1,5 +1,8 @@
 # API Client Conventions
 
+> Generic, blueprint-owned patterns. This project's own API client quirks and history live in
+> `context/api-client-notes.md` — read both.
+
 ## Philosophy
 
 The app is a pure REST client. All API interactions go through a typed repository layer. No widget or Cubit talks directly to Dio.

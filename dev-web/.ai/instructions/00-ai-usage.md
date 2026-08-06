@@ -16,6 +16,33 @@ This keeps the repo clean and ensures instructions are maintained in one place r
 
 ---
 
+## Framework vs Project Knowledge
+
+`instructions/00-ai-usage.md`, `02`–`08`, and all of `prompts/*.md` are **blueprint-owned** —
+`update-blueprint.md` overwrites them with the latest central version. They must stay generic and
+reusable across any project built from this blueprint.
+
+Project-specific conventions — the actual auth/role model, error-code vocabulary, fixed-bug
+history, asset pipeline, test harness, coverage — do **not** belong in those files, even though
+they're topically about "backend conventions" or "constraints." They belong in a
+`context/*-notes.md` companion file instead:
+
+| Generic file | Project companion |
+|---|---|
+| `instructions/02-backend-conventions.md` | `context/backend-notes.md` |
+| `instructions/03-frontend-conventions.md` | `context/frontend-notes.md` |
+| `instructions/04-constraints.md` | `context/constraints-notes.md` |
+| `instructions/06-testing-conventions.md` | `context/testing-notes.md` |
+| `instructions/07-api-conventions.md` | `context/backend-notes.md` (shares the backend one) |
+| `instructions/08-operability.md` | `context/operability-notes.md` |
+
+`context/*-notes.md` files are **never** touched by `update-blueprint.md` — same guarantee as
+`architecture.md` and `features.md`. When you discover a new project-specific rule, fixed bug, or
+convention, write it to the matching `context/*-notes.md` file and leave a one-line
+cross-reference in the generic `instructions/` file if none exists yet. See `prompts/sync.md`.
+
+---
+
 ## Setting Up a New Project
 
 1. Copy this `.ai/` folder to the repo root.
@@ -23,6 +50,9 @@ This keeps the repo clean and ensures instructions are maintained in one place r
 4. Fill in `instructions/01-project-overview.md` — tech stack, repo layout, data sources, user roles.
 5. Start filling in `context/architecture.md` as you add tables, measurements, and routes.
 6. Update `context/features.md` as milestones ship.
+7. Create `context/*-notes.md` companion files as project-specific conventions accumulate — see
+   "Framework vs Project Knowledge" above. Don't create them empty; add the first one when the
+   first project-specific rule shows up.
 
 ---
 
@@ -64,6 +94,10 @@ Before making any changes, read the relevant `.ai/` files:
 - `instructions/08-operability.md` — logging doctrine, health endpoints, config transparency
 - `context/architecture.md` — SQLite schema, InfluxDB measurements, API contracts
 - `context/features.md` — shipped milestones and backlog
+- `context/backend-notes.md`, `frontend-notes.md`, `constraints-notes.md`, `testing-notes.md`,
+  `operability-notes.md` (if present) — the project's own instantiation of the generic
+  conventions above (see "Framework vs Project Knowledge"). Each companion generic file
+  cross-references its notes file; read both.
 
 ---
 
@@ -127,6 +161,11 @@ This will sync the project's framework files with the central repository while k
   context/
     architecture.md             ← SQLite tables, InfluxDB measurements, API contracts
     features.md                 ← Shipped milestones + backlog
+    backend-notes.md            ← (if present) project's real auth/role model, backend history — see 02, 07
+    frontend-notes.md           ← (if present) project's real frontend patterns — see 03
+    constraints-notes.md        ← (if present) project's fixed-bug history, hard-rule instances — see 04
+    testing-notes.md            ← (if present) project's real fixtures, coverage, gotchas — see 06
+    operability-notes.md        ← (if present) project's real logging/health/config instances — see 08
   prompts/
     new-feature.md              ← End-to-end implementation checklist
     fix-bug.md                  ← Bug-fixing workflow (Reproduction First)

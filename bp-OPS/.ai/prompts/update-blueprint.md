@@ -12,7 +12,7 @@
 | Category | Files | Rule |
 |---|---|---|
 | **Framework** — owned by blueprint | `instructions/00-ai-usage.md`, `instructions/02-infra-conventions.md`, `instructions/03-cicd-conventions.md`, `instructions/04-constraints.md`, `instructions/05-user-profile.md`, `instructions/08-operability.md`, all `prompts/*.md` | Always overwrite with latest from repo |
-| **Project data** — owned by this project | `instructions/01-project-overview.md`, `context/architecture.md`, `context/features.md` | Never touch — project-specific |
+| **Project data** — owned by this project | `instructions/01-project-overview.md`, `context/architecture.md`, `context/features.md`, `context/infra-notes.md`, `context/cicd-notes.md`, `context/constraints-notes.md`, `context/operability-notes.md` (project-specific conventions companion to a framework file — see `00-ai-usage.md`, "Framework vs Project Knowledge") | Never touch — project-specific |
 
 ---
 
@@ -85,7 +85,12 @@ Summary: `N updated, N added, N unchanged, N failed, N need review`
 
 ## Step 5 — Check for Conflicts with Project Data
 
-Skim the updated `00-ai-usage.md` and `02-infra-conventions.md` against project data files. Flag mismatches — do not auto-fix.
+Skim the updated `00-ai-usage.md` and `02-infra-conventions.md` against project data files
+(including any `context/*-notes.md` present). Flag mismatches — do not auto-fix.
+
+Also check that every `context/*-notes.md` file present still has its companion `instructions/0X-*.md`
+file cross-referencing it — a blueprint overwrite can silently drop that line if the generic
+file's opening section changed. Re-add it if missing.
 
 ---
 

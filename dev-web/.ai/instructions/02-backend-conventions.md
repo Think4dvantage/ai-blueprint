@@ -1,5 +1,8 @@
 # Backend Conventions
 
+> Generic, blueprint-owned patterns. This project's own auth/role model and backend history live
+> in `context/backend-notes.md` — read both.
+
 ## New API Router
 
 Create `src/[package]/api/routers/<domain>.py`, register it in `main.py`.

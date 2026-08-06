@@ -45,22 +45,37 @@ Do not remove existing entries unless explicitly deleted this session.
 
 ---
 
-## Step 4 — Update Instructions (if needed)
+## Step 4 — Update `context/*-notes.md`
 
-Only update instruction files if a convention genuinely changed:
-- New navigation pattern → `02-app-conventions.md`
-- New API client pattern → `03-api-client-conventions.md`
-- New hard rule → `04-constraints.md`
+This is where most session discoveries land — not `instructions/`. Write here whenever the
+session surfaced:
+- A new navigation or state-management pattern, or a fixed bug in the screen/state structure → `app-notes.md`
+- A new API client quirk or pattern → `api-client-notes.md`
+- A fixed bug with a root cause worth guarding against → `constraints-notes.md`
+- A new test fixture, gotcha, or coverage change → `testing-notes.md`
+- A new logging or error-reporting instance → `operability-notes.md`
+
+If the matching file doesn't exist yet, create it (see `00-ai-usage.md` — "Framework vs Project
+Knowledge") and add a one-line cross-reference from the relevant `instructions/0X-*.md` file.
 
 ---
 
-## Step 5 — Update Human-Readable Files
+## Step 5 — Update `.ai/instructions/` (rare)
+
+`instructions/00-ai-usage.md`, `02`, `03`, `04`, `06`, `08` are blueprint-owned —
+`update-blueprint.md` overwrites them. Only touch them when something **generic and reusable by
+any project on this blueprint** changed. If what changed is project-specific, it belongs in
+Step 4's `context/*-notes.md` files instead, not here.
+
+---
+
+## Step 6 — Update Human-Readable Files
 
 Run `.ai/prompts/update-readme.md` to sync `README.md` and `PLANNING.md` (if present).
 
 ---
 
-## Step 6 — Leave Resume Notes
+## Step 7 — Leave Resume Notes
 
 If work is in progress, update `specs/<current-feature>/tasks.md` with:
 - Completed tasks marked `[x]`
@@ -69,11 +84,12 @@ If work is in progress, update `specs/<current-feature>/tasks.md` with:
 
 ---
 
-## Step 7 — Final Checklist
+## Step 8 — Final Checklist
 
 - [ ] `context/architecture.md` reflects all new screens, state, API, and storage
 - [ ] `context/features.md` reflects shipped milestones and updated backlog
-- [ ] Instruction files updated if any convention changed
+- [ ] `context/*-notes.md` files reflect any new project-specific conventions or fixed bugs
+- [ ] Instruction files updated only if a genuinely generic, blueprint-reusable pattern changed
 - [ ] README.md synced via `update-readme.md`
 - [ ] In-progress work has a clear resume point
 - [ ] No secrets or credentials in any committed file

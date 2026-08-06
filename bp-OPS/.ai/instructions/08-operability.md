@@ -1,5 +1,8 @@
 # Operability Conventions
 
+> Generic, blueprint-owned patterns. This project's own health/logging setup lives in
+> `context/operability-notes.md` — read both.
+
 Operability is goal #1. An operator who has never read the config files should be able to determine the health of every service from container status, logs, and the health endpoint alone.
 
 ---

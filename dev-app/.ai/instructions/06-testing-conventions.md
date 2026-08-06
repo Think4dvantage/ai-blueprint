@@ -1,5 +1,8 @@
 # Testing Conventions
 
+> Generic, blueprint-owned patterns. This project's own test fixtures, coverage, and gotchas live
+> in `context/testing-notes.md` — read both.
+
 ## Philosophy
 
 Testing is mandatory. Every feature must have tests at the appropriate level. AI-generated code is especially prone to subtle logic errors — tests are the safety net.

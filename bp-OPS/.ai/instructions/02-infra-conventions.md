@@ -1,5 +1,8 @@
 # Infrastructure Conventions
 
+> Generic, blueprint-owned patterns. This project's own deployed services and fixed-incident
+> history live in `context/infra-notes.md` — read both.
+
 ## Docker Compose — Service Definition
 
 Every service definition must include:

@@ -1,5 +1,8 @@
 # Constraints — What NOT to Do
 
+> Generic, blueprint-owned patterns. This project's own fixed-bug history and hard-rule instances
+> live in `context/constraints-notes.md` — read both.
+
 ## AI Files
 
 **All AI-related content lives exclusively in `.ai/`.** Never create tool-specific instruction files such as `CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`, `.windsurfrules`, or any equivalent — not even as thin pointers. Instructions, context, prompts, and plans all go in `.ai/` and nowhere else.

@@ -45,24 +45,38 @@ Do not remove existing entries unless they were explicitly deleted this session.
 
 ---
 
-## Step 4 — Update Instructions (if needed)
+## Step 4 — Update `context/*-notes.md`
 
-Only update instruction files if a convention genuinely changed:
-- New Traefik pattern established → `02-infra-conventions.md`
-- New pipeline pattern → `03-cicd-conventions.md`
-- New hard rule → `04-constraints.md`
+This is where most session discoveries land — not `instructions/`. Write here whenever the
+session surfaced:
+- A new deployed service or fixed incident with a root cause worth guarding against → `infra-notes.md`
+- A new pipeline quirk or CI/CD pattern → `cicd-notes.md`
+- A fixed bug with a root cause worth guarding against → `constraints-notes.md`
+- A new health-check, logging, or config-transparency instance → `operability-notes.md`
+
+If the matching file doesn't exist yet, create it (see `00-ai-usage.md` — "Framework vs Project
+Knowledge") and add a one-line cross-reference from the relevant `instructions/0X-*.md` file.
+
+---
+
+## Step 5 — Update `.ai/instructions/` (rare)
+
+`instructions/00-ai-usage.md`, `02`, `03`, `04`, `08` are blueprint-owned — `update-blueprint.md`
+overwrites them. Only touch them when something **generic and reusable by any project on this
+blueprint** changed. If what changed is project-specific, it belongs in Step 4's
+`context/*-notes.md` files instead, not here.
 
 Do not rewrite instructions just to add detail.
 
 ---
 
-## Step 5 — Update Human-Readable Files
+## Step 6 — Update Human-Readable Files
 
 Run `.ai/prompts/update-readme.md` to sync `README.md` and `PLANNING.md` (if present).
 
 ---
 
-## Step 6 — Leave Resume Notes
+## Step 7 — Leave Resume Notes
 
 If work is in progress, update `specs/<current-feature>/tasks.md` with:
 - Completed tasks marked `[x]`
@@ -73,11 +87,12 @@ If no spec folder exists, write a brief `RESUME.md` at the repo root.
 
 ---
 
-## Step 7 — Final Checklist
+## Step 8 — Final Checklist
 
 - [ ] `context/architecture.md` reflects all new/changed services, networks, volumes, pipelines
 - [ ] `context/features.md` reflects shipped milestones and updated backlog
-- [ ] Instruction files updated if any convention changed
+- [ ] `context/*-notes.md` files reflect any new project-specific conventions or fixed incidents
+- [ ] Instruction files updated only if a genuinely generic, blueprint-reusable pattern changed
 - [ ] README.md synced via `update-readme.md`
 - [ ] In-progress work has a clear resume point
 - [ ] No secrets or credentials in any committed file

@@ -30,6 +30,11 @@
   "project_data_files": [
     "instructions/01-project-overview.md",
     "context/architecture.md",
-    "context/features.md"
+    "context/features.md",
+    "context/backend-notes.md",
+    "context/frontend-notes.md",
+    "context/constraints-notes.md",
+    "context/testing-notes.md",
+    "context/operability-notes.md"
   ]
 }

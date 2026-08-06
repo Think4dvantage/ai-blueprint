@@ -1,5 +1,8 @@
 # Frontend Conventions
 
+> Generic, blueprint-owned patterns. This project's own frontend patterns and asset-pipeline
+> history live in `context/frontend-notes.md` — read both.
+
 ## No Build Step
 
 Changes to `static/` are live immediately in dev (volume-mounted). **Never introduce npm, webpack, vite, or any bundler.** The frontend is intentionally dependency-free.

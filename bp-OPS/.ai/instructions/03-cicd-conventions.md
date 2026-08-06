@@ -1,5 +1,8 @@
 # CI/CD Conventions
 
+> Generic, blueprint-owned patterns. This project's own pipeline quirks and history live in
+> `context/cicd-notes.md` — read both.
+
 ## Pipeline Structure
 
 Every GitHub Actions workflow follows this stage order:

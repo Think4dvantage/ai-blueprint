@@ -1,5 +1,8 @@
 # Operability Conventions
 
+> Generic, blueprint-owned patterns. This project's own logging/error-reporting setup lives in
+> `context/operability-notes.md` — read both.
+
 ## Philosophy
 
 An engineer debugging a production issue on a user's device must be able to reconstruct what happened from logs alone. Log everything that matters.

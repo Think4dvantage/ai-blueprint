@@ -1,5 +1,8 @@
 # API Conventions
 
+> Generic, blueprint-owned patterns. This project's own auth/role model and backend history live
+> in `context/backend-notes.md` — read both.
+
 ## Philosophy
 
 Standardizing API responses ensures that the frontend can handle both successes and errors in a predictable way. All API endpoints must follow these conventions for a consistent developer and user experience.

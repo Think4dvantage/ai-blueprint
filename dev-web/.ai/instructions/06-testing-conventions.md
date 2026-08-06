@@ -1,5 +1,8 @@
 # Testing Conventions
 
+> Generic, blueprint-owned patterns. This project's own test harness, fixtures, and coverage live
+> in `context/testing-notes.md` — read both.
+
 ## Philosophy
 
 Backend logic must be test-gated. Tests give AI-assisted development a safety net — they catch

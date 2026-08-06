@@ -1,5 +1,8 @@
 # App Conventions
 
+> Generic, blueprint-owned patterns. This project's own screen/state structure and fixed-bug
+> history live in `context/app-notes.md` — read both.
+
 ## Project Structure
 
 Follow clean architecture with three layers per feature:

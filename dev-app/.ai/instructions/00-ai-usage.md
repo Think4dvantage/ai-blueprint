@@ -13,6 +13,32 @@ This `.ai/` folder is the **single source of truth** for all AI instructions in 
 
 ---
 
+## Framework vs Project Knowledge
+
+`instructions/00-ai-usage.md`, `02`, `03`, `04`, `06`, `08`, and all of `prompts/*.md` are
+**blueprint-owned** — `update-blueprint.md` overwrites them with the latest central version. They
+must stay generic and reusable across any project built from this blueprint.
+
+Project-specific conventions — the actual screen/state structure, the real API client quirks,
+fixed-bug history, real test fixtures and coverage, real logging/error-reporting setup — do
+**not** belong in those files, even though they're topically about "app conventions" or
+"constraints." They belong in a `context/*-notes.md` companion file instead:
+
+| Generic file | Project companion |
+|---|---|
+| `instructions/02-app-conventions.md` | `context/app-notes.md` |
+| `instructions/03-api-client-conventions.md` | `context/api-client-notes.md` |
+| `instructions/04-constraints.md` | `context/constraints-notes.md` |
+| `instructions/06-testing-conventions.md` | `context/testing-notes.md` |
+| `instructions/08-operability.md` | `context/operability-notes.md` |
+
+`context/*-notes.md` files are **never** touched by `update-blueprint.md` — same guarantee as
+`architecture.md` and `features.md`. When you discover a new project-specific rule, fixed bug, or
+convention, write it to the matching `context/*-notes.md` file and leave a one-line
+cross-reference in the generic `instructions/` file if none exists yet. See `prompts/sync.md`.
+
+---
+
 ## Setting Up a New Project
 
 1. Copy this `.ai/` folder to the repo root.
@@ -20,6 +46,9 @@ This `.ai/` folder is the **single source of truth** for all AI instructions in 
 3. Fill in `instructions/01-project-overview.md` — app purpose, target platforms, API base URL, feature areas.
 4. Start filling in `context/architecture.md` as you add screens, state classes, and API integrations.
 5. Update `context/features.md` as milestones ship.
+6. Create `context/*-notes.md` companion files as project-specific conventions accumulate — see
+   "Framework vs Project Knowledge" above. Don't create them empty; add the first one when the
+   first project-specific rule shows up.
 
 ---
 
@@ -60,6 +89,10 @@ Before making any changes, read the relevant `.ai/` files:
 - `instructions/08-operability.md` — logging, error reporting, debug vs. release behavior
 - `context/architecture.md` — screen map, state classes, API contracts consumed
 - `context/features.md` — shipped milestones and backlog
+- `context/app-notes.md`, `api-client-notes.md`, `constraints-notes.md`, `testing-notes.md`,
+  `operability-notes.md` (if present) — the project's own instantiation of the generic
+  conventions above (see "Framework vs Project Knowledge"). Each companion generic file
+  cross-references its notes file; read both.
 
 ---
 
@@ -112,6 +145,11 @@ To pull the latest framework improvements from the central [AI Blueprint](https:
   context/
     architecture.md             ← Screen map, state classes, API contracts consumed
     features.md                 ← Shipped milestones + backlog
+    app-notes.md                ← (if present) project's real screen/state structure, fixed bugs — see 02
+    api-client-notes.md         ← (if present) project's real API client quirks — see 03
+    constraints-notes.md        ← (if present) project's fixed-bug history, hard-rule instances — see 04
+    testing-notes.md            ← (if present) project's real fixtures, coverage, gotchas — see 06
+    operability-notes.md        ← (if present) project's real logging/error-reporting setup — see 08
   prompts/
     new-feature.md              ← End-to-end Flutter feature checklist
     add-screen.md               ← Add a new screen to an existing feature

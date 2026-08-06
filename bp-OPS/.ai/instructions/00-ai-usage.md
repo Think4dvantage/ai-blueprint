@@ -13,12 +13,40 @@ This `.ai/` folder is the **single source of truth** for all AI instructions in 
 
 ---
 
+## Framework vs Project Knowledge
+
+`instructions/00-ai-usage.md`, `02`, `03`, `04`, `08`, and all of `prompts/*.md` are
+**blueprint-owned** — `update-blueprint.md` overwrites them with the latest central version. They
+must stay generic and reusable across any project built from this blueprint.
+
+Project-specific conventions — the actual services deployed, fixed-incident history, real
+pipeline quirks, real health/logging setup — do **not** belong in those files, even though
+they're topically about "infra conventions" or "constraints." They belong in a `context/*-notes.md`
+companion file instead:
+
+| Generic file | Project companion |
+|---|---|
+| `instructions/02-infra-conventions.md` | `context/infra-notes.md` |
+| `instructions/03-cicd-conventions.md` | `context/cicd-notes.md` |
+| `instructions/04-constraints.md` | `context/constraints-notes.md` |
+| `instructions/08-operability.md` | `context/operability-notes.md` |
+
+`context/*-notes.md` files are **never** touched by `update-blueprint.md` — same guarantee as
+`architecture.md` and `features.md`. When you discover a new project-specific rule, fixed
+incident, or convention, write it to the matching `context/*-notes.md` file and leave a one-line
+cross-reference in the generic `instructions/` file if none exists yet. See `prompts/sync.md`.
+
+---
+
 ## Setting Up a New Project
 
 1. Copy this `.ai/` folder to the repo root.
 2. Fill in `instructions/01-project-overview.md` — services deployed, network layout, CI/CD pipelines.
 3. Start filling in `context/architecture.md` as you add services, routes, and pipelines.
 4. Update `context/features.md` as milestones ship.
+5. Create `context/*-notes.md` companion files as project-specific conventions accumulate — see
+   "Framework vs Project Knowledge" above. Don't create them empty; add the first one when the
+   first project-specific rule shows up.
 
 ---
 
@@ -58,6 +86,9 @@ Before making any changes, read the relevant `.ai/` files:
 - `instructions/08-operability.md` — container health, monitoring, logging
 - `context/architecture.md` — deployed services map, network layout, pipeline inventory
 - `context/features.md` — shipped milestones and backlog
+- `context/infra-notes.md`, `cicd-notes.md`, `constraints-notes.md`, `operability-notes.md` (if
+  present) — the project's own instantiation of the generic conventions above (see "Framework vs
+  Project Knowledge"). Each companion generic file cross-references its notes file; read both.
 
 ---
 
@@ -108,6 +139,10 @@ To pull the latest framework improvements from the central [AI Blueprint](https:
   context/
     architecture.md             ← Deployed services, networks, pipeline inventory
     features.md                 ← Shipped milestones + backlog
+    infra-notes.md              ← (if present) project's real services, fixed incidents — see 02
+    cicd-notes.md               ← (if present) project's real pipeline quirks — see 03
+    constraints-notes.md        ← (if present) project's fixed-bug history, hard-rule instances — see 04
+    operability-notes.md        ← (if present) project's real health/logging setup — see 08
   prompts/
     add-service.md              ← Add a new Docker Compose service
     add-traefik-route.md        ← Add Traefik routing for a service
