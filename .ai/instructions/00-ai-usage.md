@@ -11,7 +11,7 @@ Three blueprint categories are maintained here:
 | Category | Folder | Use for |
 |---|---|---|
 | `dev-web` | `dev-web/.ai/` | FastAPI + Vanilla JS web services |
-| `bp-OPS` | `bp-OPS/.ai/` | Infrastructure: Docker Compose, Traefik, GitHub Actions |
+| `bp-iac` | `bp-iac/.ai/` | Infrastructure: Docker Compose, Traefik, GitHub Actions |
 | `dev-app` | `dev-app/.ai/` | Flutter mobile apps |
 
 Each category is a self-contained `.ai/` folder. Copy the right one into a new project's root to bootstrap it with full AI context.
@@ -23,7 +23,7 @@ Each category is a self-contained `.ai/` folder. Copy the right one into a new p
 - **Never create tool-specific files** (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`, `.windsurfrules`, etc.) — all AI instructions live in `.ai/`. No wrapper files, ever.
 - **Category folders are the source of truth** — edit in the category folder, not in any consuming project.
 - **Shared files must stay in sync** — `05-user-profile.md` is identical across all categories. When it changes here, propagate to all three.
-- **Don't mix categories** — each category is independent. No cross-references between `dev-web/` and `bp-OPS/`.
+- **Don't mix categories** — each category is independent. No cross-references between `dev-web/` and `bp-iac/`.
 
 ---
 
@@ -70,7 +70,7 @@ Before making any changes to this repo, read:
     sync.md                ← Sync shared files across categories; update features.md
 
 dev-web/.ai/               ← Blueprint for FastAPI + Vanilla JS web services
-bp-OPS/.ai/                ← Blueprint for Docker/Traefik/GitHub Actions infra repos
+bp-iac/.ai/                ← Blueprint for Docker/Traefik/GitHub Actions infra repos
 dev-app/.ai/               ← Blueprint for Flutter mobile apps
 ```
 

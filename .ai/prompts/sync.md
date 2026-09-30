@@ -27,18 +27,18 @@ The following files must be identical across all categories. For each one that c
 
 | File | Categories to update |
 |---|---|
-| `instructions/05-user-profile.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/specify.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/clarify.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/plan.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/checklist.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/tasks.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/analyze.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/implement.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/architect.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/taskstoissues.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/fix-bug.md` | `dev-web`, `bp-OPS`, `dev-app` |
-| `prompts/update-readme.md` | `dev-web`, `bp-OPS`, `dev-app` |
+| `instructions/05-user-profile.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/specify.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/clarify.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/plan.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/checklist.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/tasks.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/analyze.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/implement.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/architect.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/taskstoissues.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/fix-bug.md` | `dev-web`, `bp-iac`, `dev-app` |
+| `prompts/update-readme.md` | `dev-web`, `bp-iac`, `dev-app` |
 
 Do not auto-propagate category-specific files (conventions, update-blueprint.md, context templates).
 

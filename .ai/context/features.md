@@ -18,5 +18,5 @@
 
 - Add a PostgreSQL variant of `dev-web/02-backend-conventions.md` for projects that outgrow SQLite
 - Add a `dev-web/prompts/add-auth-provider.md` scaffold prompt for OAuth/OIDC integration
-- Add a `bp-OPS/prompts/add-backup.md` prompt for scheduled backup pipelines
+- Add a `bp-iac/prompts/add-backup.md` prompt for scheduled backup pipelines
 - Add a `dev-data` category for data science / notebook repos (Python, Jupyter, pandas, DVC)

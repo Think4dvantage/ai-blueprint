@@ -1,5 +1,5 @@
 {
-  "category": "bp-OPS",
+  "category": "bp-iac",
   "framework_files": [
     "instructions/00-ai-usage.md",
     "instructions/02-infra-conventions.md",

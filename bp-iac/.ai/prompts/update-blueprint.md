@@ -1,7 +1,7 @@
 # Prompt: Update AI Blueprint from Central Repo
 
 > **Purpose**: Pull the latest framework files from the central AI Blueprint repo and apply them to this project's `.ai/` folder.
-> **Category**: `bp-OPS` — Docker/Traefik/GitHub Actions infrastructure
+> **Category**: `bp-iac` — Infrastructure as Code (Docker Compose / Traefik / GitHub Actions)
 > **Source**: https://github.com/Think4dvantage/ai-blueprint
 > **Use when**: You want to sync improvements made to the central blueprint into this project.
 
@@ -18,7 +18,7 @@
 
 ## Step 0 — Fetch Blueprint Manifest
 
-**URL**: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp-OPS/.ai/manifest.json`
+**URL**: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp-iac/.ai/manifest.json`
 
 - If successful, use the manifest file list in Step 1.
 - If 404, use the hardcoded fallback list below.
@@ -27,7 +27,7 @@
 
 ## Step 1 — Fetch the Latest Framework Files
 
-Base URL: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp-OPS/.ai/`
+Base URL: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp-iac/.ai/`
 
 **Hardcoded Fallback List**:
 
@@ -103,18 +103,18 @@ Identify files in `.ai/prompts/` or `.ai/instructions/` that exist locally but w
 ### 6.2 Propose the Contribution
 
 > **Contribution Suggestion**: You've added/improved:
-> - `prompts/new-ops-prompt.md`
+> - `prompts/new-iac-prompt.md`
 >
 > Contribute back to the central blueprint?
 
 ### 6.3 Provide the Transport Prompt
 
 ```markdown
-# Contribution from Project: [PROJECT NAME] (bp-OPS category)
+# Contribution from Project: [PROJECT NAME] (bp-iac category)
 
-Please update the following blueprint files in bp-OPS/.ai/:
+Please update the following blueprint files in bp-iac/.ai/:
 
-1. `prompts/new-ops-prompt.md`: [description]
+1. `prompts/new-iac-prompt.md`: [description]
 
 [Paste full content here]
 ```

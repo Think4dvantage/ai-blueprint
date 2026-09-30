@@ -12,7 +12,7 @@ Determine which category fits the project:
 | # | Category | Choose if... |
 |---|---|---|
 | 1 | `dev-web` | Python/FastAPI backend + Vanilla JS frontend |
-| 2 | `bp-OPS` | Docker Compose services, Traefik routing, GitHub Actions pipelines |
+| 2 | `bp-iac` | Docker Compose services, Traefik routing, GitHub Actions pipelines |
 | 3 | `dev-app` | Flutter mobile app |
 
 If none fit, run `.ai/prompts/new-category.md` first to create one.
@@ -51,7 +51,7 @@ Open each file and replace every `[PLACEHOLDER]`.
 Open `prompts/update-blueprint.md` in the copied folder. Confirm the base URL points to the correct category path:
 
 - dev-web: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/dev-web/.ai/`
-- bp-OPS: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp-OPS/.ai/`
+- bp-iac: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/bp-iac/.ai/`
 - dev-app: `https://raw.githubusercontent.com/Think4dvantage/ai-blueprint/main/dev-app/.ai/`
 
 This is set correctly if you copied from the right category folder.

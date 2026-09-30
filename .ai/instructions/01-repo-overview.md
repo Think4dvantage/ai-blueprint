@@ -13,11 +13,11 @@
 - API: standardized success/error response format (RFC 7807)
 - Operability: structured logging, health endpoint, config transparency
 
-**When NOT to use**: React/Vue frontend, build step required, PostgreSQL at scale, or the primary concern is infrastructure (use `bp-OPS`).
+**When NOT to use**: React/Vue frontend, build step required, PostgreSQL at scale, or the primary concern is infrastructure (use `bp-iac`).
 
 ---
 
-## bp-OPS — Operating Infrastructure
+## bp-iac — Infrastructure as Code
 
 **Use for**: Infrastructure repos — Docker Compose service definitions, Traefik configuration, GitHub Actions pipelines, homelab deployments.
 
@@ -28,7 +28,7 @@
 - CI/CD: GitHub Actions workflow patterns, pipeline structure, self-hosted runners
 - Operability: container health, log aggregation, service status
 
-**When NOT to use**: The repo contains application code. OPS repos contain only infrastructure definition files. If you need both, split into separate repos: one `dev-web` / `dev-app` for the app, one `bp-OPS` for its deployment.
+**When NOT to use**: The repo contains application code. IaC repos contain only infrastructure definition files. If you need both, split into separate repos: one `dev-web` / `dev-app` for the app, one `bp-iac` for its deployment.
 
 ---
 
